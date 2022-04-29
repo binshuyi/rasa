@@ -1,0 +1,34 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_answer_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+
+- rule: Activate Form
+  steps:
+  - intent: search_express
+  - action: action_search_express_form
+  - active_loop: action_search_express_form
+
+- rule: Submit form
+  condition:
+  # Condition that form is active.
+    - active_loop: action_search_express_form
+  steps:
+  # Form is deactivated
+  - action: action_search_express_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_search_express
+  - action: utter_search_stop_numberinfo

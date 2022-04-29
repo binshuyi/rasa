@@ -1,0 +1,74 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:            # 意图分类类别
+- affirm
+- deny
+- greet
+- goodbye
+- thanks
+- whoareyou
+- whattodo
+- bot_challenge
+- search_express
+entities:           # 实体类别
+- express
+- number
+slots:              # 定义槽
+  expressinfo:
+    type: text
+    auto_fill: false
+    influence_conversation: true
+  numberinfo:
+    type: text
+    auto_fill: false
+    influence_conversation: true
+responses:
+  utter_answer_affirm:
+  - text: 嗯嗯，好的！
+  - text: 嗯嗯，很开心能够帮您解决问题~
+  - text: 嗯嗯，还需要什么我能够帮助您的呢？
+  utter_answer_greet:
+  - text: 您好！请问我可以帮到您吗？
+  - text: 您好！很高兴为您服务。请说出您要查询的功能？
+  utter_answer_goodbye:
+  - text: 再见
+  - text: 拜拜
+  - text: 虽然我有万般舍不得，但是天下没有不散的宴席~祝您安好！
+  - text: 期待下次再见！
+  - text: 嗯嗯，下次需要时随时记得我哟~
+  - text: see you!
+  utter_answer_deny:
+  - text: 主人，您不开心吗？不要离开我哦
+  - text: 怎么了，主人？
+  - text: 出什么事了啊？
+  utter_answer_thanks:
+  - text: 嗯呢。不用客气~
+  - text: 这是我应该做的，主人~
+  - text: 嗯嗯，合作愉快！
+  - text: 能帮到你就好了！
+  utter_answer_whoareyou:
+  - text: 您好！我是小天呀，您的AI智能助理
+  - text: 我是小天，您的私人助理
+  utter_answer_whattodo:
+  - text: 您好！很高兴为您服务，我目前只支持查询快递信息哦。
+  utter_iamabot:
+  - text: I am a bot, powered by Ice2020.
+  utter_ask_expressinfo:
+  - text: 请输入需要查询的快递公司,目前只支持顺丰,中通,圆通
+  utter_ask_numberinfo:
+  - text: 请输入要查询的快递单号
+  utter_search_stop_numberinfo:
+  - text: 关于{expressinfo}快递单号{numberinfo}查找结束。
+  utter_default:
+  - text: 没有听懂，哭唧唧~
+actions:
+- action_search_express
+forms:              # 生成表单
+  action_search_express_form:
+    expressinfo:
+    - entity: express
+      type: from_entity
+    numberinfo:
+    - entity: number
+      type: from_entity
